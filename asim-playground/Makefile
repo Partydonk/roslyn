@@ -45,6 +45,6 @@ bin/%.exe: %.cs
 clean:
 	rm -rf bin
 
-run-sample:
-	MONO_PATH=$(RUNTIME_MONO_PATH) DYLD_LIBRARY_PATH=$(RUNTIME_MONO_PATH) $(RUNTIME_DIR)/artifacts/obj/mono/OSX.x64.Debug/mono/mini/mono-sgen Scratch.exe 2>&1 | less
+run-sample: bin/Scratch.exe
+	MONO_PATH=$(RUNTIME_MONO_PATH) DYLD_LIBRARY_PATH=$(RUNTIME_MONO_PATH) $(RUNTIME_DIR)/artifacts/obj/mono/OSX.x64.Debug/mono/mini/mono-sgen bin/Scratch.exe 2>&1 | less
 
