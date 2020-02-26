@@ -48,3 +48,6 @@ clean:
 run-sample: bin/Scratch.exe
 	MONO_PATH=$(RUNTIME_MONO_PATH) DYLD_LIBRARY_PATH=$(RUNTIME_MONO_PATH) $(RUNTIME_DIR)/artifacts/obj/mono/OSX.x64.Debug/mono/mini/mono-sgen bin/Scratch.exe 2>&1 | less
 
+debug-sample: bin/Scratch.exe
+	MONO_PATH=$(RUNTIME_MONO_PATH) DYLD_LIBRARY_PATH=$(RUNTIME_MONO_PATH) lldb -- $(RUNTIME_DIR)/artifacts/obj/mono/OSX.x64.Debug/mono/mini/mono-sgen bin/Scratch.exe
+
