@@ -2,30 +2,8 @@
 
 TOP="$(dirname "$0")/.."
 
-RUNTIME_BIN="${TOP}/../runtime/artifacts/bin"
-RUNTIME_ASSEMBLIES=(
-    "${RUNTIME_BIN}/mono/OSX.x64.Debug/System.Private.CoreLib.dll"
-    "${RUNTIME_BIN}/mscorlib/netcoreapp5.0-Debug/mscorlib.dll"
-    "${RUNTIME_BIN}/System/netcoreapp5.0-Debug/System.dll"
-    "${RUNTIME_BIN}/System.Runtime/netcoreapp5.0-Unix-Debug/System.Runtime.dll"
-    "${RUNTIME_BIN}/System.Console/netcoreapp5.0-Unix-Debug/System.Console.dll"
-)
-
-REFERENCES=()
-for assembly in "${RUNTIME_ASSEMBLIES[@]}"; do
-    test -f "${assembly}" || {
-        echo "Assembly does not exist: ${assembly}"
-        echo "Run 'make runtime' to build runtime dependencies."
-        exit 1
-    }
-    REFERENCES+=("-r:${assembly}")
-done
-
 dotnet run \
     --project "${TOP}/src/Compilers/CSharp/csc/csc.csproj" \
     --framework netcoreapp3.1 \
     -- \
-    -langversion:preview \
-    -nostdlib+ \
-    "${REFERENCES[@]}" \
     "$@"

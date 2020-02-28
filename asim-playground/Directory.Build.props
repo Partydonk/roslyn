@@ -1,0 +1,29 @@
+<Project>
+  <PropertyGroup>
+    <CscToolPath>$(MSBuildThisFileDirectory)</CscToolPath>
+    <CscToolExe>csc</CscToolExe>
+    <IkdasmToolPath></IkdasmToolPath>
+    <IkdasmToolExe>ikdasm</IkdasmToolExe>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <NoCompilerStandardLib>true</NoCompilerStandardLib>
+    <LangVersion>preview</LangVersion>
+    <TargetFramework>net48</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <RuntimeBinPath>$(MSBuildThisFileDirectory)..\..\runtime\artifacts\bin\</RuntimeBinPath>
+    <RuntimeObjPath>$(MSBuildThisFileDirectory)..\..\runtime\artifacts\obj\</RuntimeObjPath>
+    <RuntimeBinMonoPath>$(RuntimeBinPath).dotnet-mono\shared\Microsoft.NETCore.App\5.0.0-alpha.1.20070.4\</RuntimeBinMonoPath>
+    <RuntimeTool>MONO_PATH=&quot;$(RuntimeBinMonoPath)&quot; DYLD_LIBRARY_PATH=&quot;$(RuntimeBinMonoPath)&quot; &quot;$(RuntimeObjPath)mono\OSX.x64.Debug\mono\mini\mono-sgen&quot;</RuntimeTool>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="$(RuntimeBinPath)mono\OSX.x64.Debug\System.Private.CoreLib.dll" />
+    <Reference Include="$(RuntimeBinPath)mscorlib\netcoreapp5.0-Debug\mscorlib.dll" />
+    <Reference Include="$(RuntimeBinPath)System\netcoreapp5.0-Debug\System.dll" />
+    <Reference Include="$(RuntimeBinPath)System.Runtime\netcoreapp5.0-Unix-Debug\System.Runtime.dll" />
+    <Reference Include="$(RuntimeBinPath)System.Console\netcoreapp5.0-Unix-Debug\System.Console.dll" />
+  </ItemGroup>
+</Project>

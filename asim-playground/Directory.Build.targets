@@ -1,0 +1,31 @@
+<Project>
+  <Target
+    Name="Ikdasm"
+    AfterTargets="CopyFilesToOutputDirectory">
+    <PropertyGroup>
+      <IkdasmOutputPath>$([System.IO.Path]::ChangeExtension('$(TargetPath)', '.il'))</IkdasmOutputPath>
+    </PropertyGroup>
+    <Exec
+      Command="&quot;$(IkdasmToolPath)$(IkdasmToolExe)&quot; &quot;$(TargetPath)&quot;"
+      ConsoleToMsBuild="true"
+      StandardOutputImportance="low"
+      EchoOff="true">
+      <Output TaskParameter="ConsoleOutput" ItemName="IkdasmOutput"/>
+    </Exec>
+    <WriteLinesToFile
+      File="$(IkdasmOutputPath)"
+      Lines="@(IkdasmOutput)"
+      Overwrite="true"/>
+    <Message Text="$(AssemblyName) -> $(IkdasmOutputPath)" Importance="high"/>
+  </Target>
+
+  <Target Name="Run">
+    <PropertyGroup>
+      <_StartWorkingDirectory Condition="'$(StartWorkingDirectory)' == ''">$(OutDir)</_StartWorkingDirectory>
+      <_StartWorkingDirectory Condition="'$(StartWorkingDirectory)' != ''">$(StartWorkingDirectory)</_StartWorkingDirectory>
+    </PropertyGroup>
+    <Exec
+      Command="$(RuntimeTool) $(TargetPath) $(StartArguments)"
+      WorkingDirectory="$(_StartWorkingDirectory)"/>
+  </Target>
+</Project>
