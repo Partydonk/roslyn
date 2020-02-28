@@ -1464,6 +1464,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             Call,
             CallVirt,
             ConstrainedCallVirt,
+            ConstrainedCall,
         }
 
         private void EmitCallExpression(BoundCall call, UseKind useKind)
@@ -1497,7 +1498,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             if (!method.RequiresInstanceReceiver)
             {
                 callKind = method.IsStatic && method.IsAbstract && receiver is object
-                    ? CallKind.ConstrainedCallVirt
+                    ? CallKind.ConstrainedCall
                     : CallKind.Call;
             }
             else
@@ -1645,6 +1646,12 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                     _builder.EmitOpCode(ILOpCode.Constrained);
                     EmitSymbolToken(receiver.Type, receiver.Syntax);
                     _builder.EmitOpCode(ILOpCode.Callvirt, stackBehavior);
+                    break;
+
+                case CallKind.ConstrainedCall:
+                    _builder.EmitOpCode(ILOpCode.Constrained);
+                    EmitSymbolToken(receiver.Type, receiver.Syntax);
+                    _builder.EmitOpCode(ILOpCode.Call, stackBehavior);
                     break;
             }
 
