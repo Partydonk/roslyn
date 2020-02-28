@@ -16,11 +16,11 @@ namespace System.Numerics
     public interface INumeric<TSelf> : IAdditiveArithmetic<TSelf>, IExpressibleByIntegerLiteral<TSelf>
         where TSelf : INumeric<TSelf>
     {
-        abstract static TSelf Magnitude { get; }
         abstract static TSelf operator *(TSelf left, TSelf right);
     }
 
     public interface IAdditiveArithmetic<TSelf> : IOperatorEquatable<TSelf>
+        where TSelf : IAdditiveArithmetic<TSelf>
     {
         abstract static TSelf Zero { get; }
         abstract static TSelf operator +(TSelf left, TSelf right);
