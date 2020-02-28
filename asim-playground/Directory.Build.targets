@@ -6,16 +6,8 @@
       <IkdasmOutputPath>$([System.IO.Path]::ChangeExtension('$(TargetPath)', '.il'))</IkdasmOutputPath>
     </PropertyGroup>
     <Exec
-      Command="&quot;$(IkdasmToolPath)$(IkdasmToolExe)&quot; &quot;$(TargetPath)&quot;"
-      ConsoleToMsBuild="true"
-      StandardOutputImportance="low"
-      EchoOff="true">
-      <Output TaskParameter="ConsoleOutput" ItemName="IkdasmOutput"/>
-    </Exec>
-    <WriteLinesToFile
-      File="$(IkdasmOutputPath)"
-      Lines="@(IkdasmOutput)"
-      Overwrite="true"/>
+      Command="&quot;$(IkdasmToolPath)$(IkdasmToolExe)&quot; &quot;$(TargetPath)&quot; > &quot;$(IkdasmOutputPath)&quot;"
+      EchoOff="true"/>
     <Message Text="$(AssemblyName) -> $(IkdasmOutputPath)" Importance="high"/>
   </Target>
 
