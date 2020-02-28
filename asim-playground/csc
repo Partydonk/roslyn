@@ -2,7 +2,7 @@
 
 TOP="$(dirname "$0")/.."
 
-RUNTIME_BIN="${TOP}/../dotnet-runtime-asim/artifacts/bin"
+RUNTIME_BIN="${TOP}/../runtime/artifacts/bin"
 RUNTIME_ASSEMBLIES=(
     "${RUNTIME_BIN}/mono/OSX.x64.Debug/System.Private.CoreLib.dll"
     "${RUNTIME_BIN}/mscorlib/netcoreapp5.0-Debug/mscorlib.dll"
