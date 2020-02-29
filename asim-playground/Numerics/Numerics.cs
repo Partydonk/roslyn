@@ -27,22 +27,21 @@ namespace System.Numerics
         abstract static TSelf operator -(TSelf left, TSelf right);
     }
 
-    // Gross.
     public interface IOperatorEquatable<TSelf> : IEquatable<TSelf>
     {
-        // abstract static bool operator ==(TSelf left, TSelf right);
-        // abstract static bool operator !=(TSelf left, TSelf right);
+        abstract static bool operator ==(TSelf left, TSelf right);
+        abstract static bool operator !=(TSelf left, TSelf right);
     }
 
     public interface IExpressibleByIntegerLiteral<TSelf>
         where TSelf : IExpressibleByIntegerLiteral<TSelf>
     {
-        // abstract static implicit operator TSelf(int value);
+        abstract static implicit operator TSelf(int value);
     }
 
     public interface IExpressibleByFloatLiteral<TSelf>
         where TSelf : IExpressibleByFloatLiteral<TSelf>
     {
-        // abstract static implicit operator TSelf(double value);
+        abstract static implicit operator TSelf(double value);
     }
 }
