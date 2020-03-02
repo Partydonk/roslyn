@@ -48,6 +48,9 @@ clean:
 run-sample: bin/Scratch.exe
 	MONO_PATH=$(RUNTIME_MONO_PATH) DYLD_LIBRARY_PATH=$(RUNTIME_MONO_PATH) $(RUNTIME_DIR)/artifacts/obj/mono/OSX.x64.Debug/mono/mini/mono-sgen bin/Scratch.exe 2>&1 | less
 
-debug-sample: bin/Scratch.exe
-	MONO_PATH=$(RUNTIME_MONO_PATH) DYLD_LIBRARY_PATH=$(RUNTIME_MONO_PATH) lldb -- $(RUNTIME_DIR)/artifacts/obj/mono/OSX.x64.Debug/mono/mini/mono-sgen bin/Scratch.exe
+debug-scratch: Scratch/bin/Debug/net48/Scratch.exe
+	MONO_PATH=$(RUNTIME_MONO_PATH) DYLD_LIBRARY_PATH=$(RUNTIME_MONO_PATH) lldb -- $(RUNTIME_DIR)/artifacts/obj/mono/OSX.x64.Debug/mono/mini/mono-sgen Scratch/bin/Debug/net48/Scratch.exe
+
+debug-numerics: Numerics/bin/Debug/net48/Numerics.exe
+	MONO_PATH=$(RUNTIME_MONO_PATH) DYLD_LIBRARY_PATH=$(RUNTIME_MONO_PATH) lldb -- $(RUNTIME_DIR)/artifacts/obj/mono/OSX.x64.Debug/mono/mini/mono-sgen Numerics/bin/Debug/net48/Numerics.exe
 
