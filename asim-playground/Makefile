@@ -54,3 +54,7 @@ debug-scratch: Scratch/bin/Debug/net48/Scratch.exe
 debug-numerics: Numerics/bin/Debug/net48/Numerics.exe
 	MONO_PATH=$(RUNTIME_MONO_PATH) DYLD_LIBRARY_PATH=$(RUNTIME_MONO_PATH) lldb -- $(RUNTIME_DIR)/artifacts/obj/mono/OSX.x64.Debug/mono/mini/mono-sgen Numerics/bin/Debug/net48/Numerics.exe
 
+trace-numerics: Numerics/bin/Debug/net48/Numerics.exe
+	MONO_PATH=$(RUNTIME_MONO_PATH) DYLD_LIBRARY_PATH=$(RUNTIME_MONO_PATH) $(RUNTIME_DIR)/artifacts/obj/mono/OSX.x64.Debug/mono/mini/mono-sgen --trace Numerics/bin/Debug/net48/Numerics.exe
+
+
