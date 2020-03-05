@@ -1,3 +1,4 @@
+using System;
 using System.Numerics;
 
 struct PartydonkReal : IFloatingPoint<PartydonkReal>
@@ -6,6 +7,8 @@ struct PartydonkReal : IFloatingPoint<PartydonkReal>
 
     public PartydonkReal(double value)
         => this.value = value;
+
+    public PartydonkReal Magnitude => Math.Abs(value);
 
     public override string ToString()
         => value.ToString();
@@ -24,20 +27,26 @@ struct PartydonkReal : IFloatingPoint<PartydonkReal>
     public static implicit operator PartydonkReal(double value)
         => new PartydonkReal(value);
 
-    public static PartydonkReal operator-(PartydonkReal right)
+    public static implicit operator PartydonkReal(int value)
+        => new PartydonkReal(value);
+
+    public static PartydonkReal operator -(PartydonkReal right)
         => -right.value;
 
-    public static PartydonkReal operator+(PartydonkReal left, PartydonkReal right)
+    public static PartydonkReal operator +(PartydonkReal left, PartydonkReal right)
         => left.value + right.value;
 
-    public static PartydonkReal operator-(PartydonkReal left, PartydonkReal right)
+    public static PartydonkReal operator -(PartydonkReal left, PartydonkReal right)
         => left.value - right.value;
     
-    public static PartydonkReal operator*(PartydonkReal left, PartydonkReal right)
+    public static PartydonkReal operator *(PartydonkReal left, PartydonkReal right)
         => left.value * right.value;
     
-    public static PartydonkReal operator/(PartydonkReal left, PartydonkReal right)
+    public static PartydonkReal operator /(PartydonkReal left, PartydonkReal right)
         => left.value / right.value;
+    
+    public static PartydonkReal operator %(PartydonkReal left, PartydonkReal right)
+        => left.value % right.value;
 
     public static bool operator ==(PartydonkReal left, PartydonkReal right)
         => left.value == right.value;

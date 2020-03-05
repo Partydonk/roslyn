@@ -16,9 +16,13 @@ interface IPartydonk
 
 sealed class Partydonk : IPartydonk
 {
-    public static void StaticContract()
+    public static void StaticContractMethod()
     {
     }
+
+    public static void StaticContractMethod(bool a) {}
+
+    public static bool StaticContractProperty { get; }
 
     public void InstanceContract()
     {

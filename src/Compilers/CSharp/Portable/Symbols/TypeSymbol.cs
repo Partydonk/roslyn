@@ -807,7 +807,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             Symbol implicitImpl = null;
             Symbol closestMismatch = null;
-            bool canBeImplementedImplicitly = interfaceMember.DeclaredAccessibility == Accessibility.Public && !interfaceMember.IsEventOrPropertyWithImplementableNonPublicAccessor();
+            bool canBeImplementedImplicitly =
+                (interfaceMember.DeclaredAccessibility == Accessibility.Public || (
+                    interfaceMember.IsStatic && interfaceMember.IsAbstract)) &&
+                    !interfaceMember.IsEventOrPropertyWithImplementableNonPublicAccessor();
             TypeSymbol implementingBaseOpt = null; // Calculated only if canBeImplementedImplicitly == true
             HashSet<DiagnosticInfo> useSiteDiagnostics = null;
 
@@ -1982,7 +1985,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </remarks>
         private static bool IsInterfaceMemberImplementation(Symbol candidateMember, Symbol interfaceMember, bool implementingTypeIsFromSomeCompilation)
         {
-            if (candidateMember.DeclaredAccessibility != Accessibility.Public || candidateMember.IsStatic)
+            if (candidateMember.DeclaredAccessibility != Accessibility.Public || candidateMember.IsStatic != interfaceMember.IsStatic)
             {
                 return false;
             }

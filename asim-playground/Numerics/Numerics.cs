@@ -16,6 +16,7 @@ namespace System.Numerics
     public interface INumeric<TSelf> : IAdditiveArithmetic<TSelf>, IExpressibleByIntegerLiteral<TSelf>
         where TSelf : INumeric<TSelf>
     {
+        TSelf Magnitude { get; }
         abstract static TSelf operator *(TSelf left, TSelf right);
     }
 
