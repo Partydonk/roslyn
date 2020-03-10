@@ -718,7 +718,15 @@ namespace Microsoft.CodeAnalysis.CSharp
             // Otherwise, nothing special here.
             Debug.Assert((object)method != null);
             Debug.Assert(TypeSymbol.Equals(method.ReturnType, type, TypeCompareKind.ConsiderEverything2));
-            return BoundCall.Synthesized(syntax, null, method, loweredLeft, loweredRight);
+
+            BoundExpression receiver = null;
+            if (method.IsStatic && method.IsAbstract)
+            {
+                Debug.Assert(TypeSymbol.Equals(loweredLeft.Type, loweredRight.Type, TypeCompareKind.ConsiderEverything2));
+                receiver = loweredLeft;
+            }
+
+            return BoundCall.Synthesized(syntax, receiver, method, loweredLeft, loweredRight);
         }
 
         private BoundExpression TrivialLiftedComparisonOperatorOptimizations(
